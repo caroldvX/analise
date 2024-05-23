@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --circle-size: 200px;
+            --border-color: #33FF4C;
+            --progress-duration: 6s;
+        }
+        body {
+            background-color: white;
+            display: flex;
+            flex-direction: column; /* Adicionado para alinhar a imagem e a barra de progresso verticalmente */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: var(--circle-size);
+            height: var(--circle-size);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 5px solid var(--border-color);
+            border-radius: 50%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .loader{
+            display: block;
+            position: relative;
+            height: 18px;
+            width: 80%;
+            border: 2px solid #fff;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-top: -75px; /* Ajustado para mover a barra de progresso um pouco para cima */
+        }
+        .loader:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: #08cc08;
+            animation: 8s prog  ;
+        }
+
+        @keyframes prog {
+            to  {   width: 100%;}
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://meu-contato.site/images/foto1.png" alt="Imagem centralizada">
+    </div>
+    
+    <div  class="loader"></div>
+
+</body>
+</html>
