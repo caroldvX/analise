@@ -108,17 +108,13 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Cria uma nova imagem
-            const imgElement = new Image();
-            imgElement.src = imageUrl;
-            imgElement.alt = "Imagem centralizada";
-            imgElement.style.display = 'none'; // Inicialmente oculta a imagem
-
-            // Quando a imagem estiver carregada, insere-a na div .container e a exibe
-            imgElement.onload = function() {
-                document.querySelector('.container').appendChild(imgElement);
-                imgElement.style.display = 'block';
-            };
+            // Insere a URL da imagem como background do elemento .container
+            if (imageUrl) {
+                const containerElement = document.querySelector('.container');
+                containerElement.style.backgroundImage = 'url(' + imageUrl + ')';
+                containerElement.style.backgroundSize = 'cover';
+                containerElement.style.backgroundPosition = 'center';
+            }
 
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
