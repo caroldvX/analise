@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        :root {
-            --circle-size: 200px;
-            --border-color: #33FF4C;
-            --progress-duration: 6s;
-        }
         body {
             background-color: white;
             display: flex;
@@ -19,14 +14,14 @@
             margin: 0;
         }
         .container {
-            width: var(--circle-size);
-            height: var(--circle-size);
+            width: 50vmin; /* Alterado para ser responsivo */
+            height: 50vmin; /* Alterado para ser responsivo */
             margin: auto;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            border: 5px solid var(--border-color);
+            border: 5px solid #33FF4C;
             border-radius: 50%;
             position: relative;
         }
@@ -44,7 +39,7 @@
             border: 2px solid #fff;
             border-radius: 40px;
             overflow: hidden;
-            margin-top: -75px; /* Ajustado para mover a barra de progresso um pouco para cima */
+            margin-top: 2vmin; /* Ajustado para ser responsivo */
         }
         .loader:after{
             content: '';
