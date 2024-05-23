@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans:ital,wght@0,200;1,200&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --logo-height: 150px;
+            --logo-width: 150px;
+            --logo-margin: 0 auto;
+        }
         body {
             background-color: #f7f8ff;
             display: flex;
-            flex-direction: column; /* Adicionado para alinhar a imagem e a barra de progresso verticalmente */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: 'Nunito Sans', sans-serif; /* Adicionado a fonte Nunito Sans */
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: var(--logo-margin);
+        }
+        .logo img {
+            height: var(--logo-height);
+            width: var(--logo-width);
         }
         .container {
-            width: 50vmin; /* Alterado para ser responsivo */
-            height: 50vmin; /* Alterado para ser responsivo */
+            width: 50vmin;
+            height: 50vmin;
             margin: auto;
             display: flex;
             justify-content: center;
@@ -36,10 +53,10 @@
             position: relative;
             height: 18px;
             width: 80%;
-            border: 2px solid #fff;
+            border: 2px solid #f7f8ff;
             border-radius: 40px;
             overflow: hidden;
-            margin-top: 2vmin; /* Ajustado para ser responsivo */
+            margin-top: 2vmin;
         }
         .loader:after{
             content: '';
@@ -49,21 +66,66 @@
             height: 100%;
             width: 0;
             background: #08cc08;
-            animation: 8s prog  ;
+            animation: 8s prog;
         }
+        .connected {
+    display: none;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
+    font-weight: bold; /* Adicionado negrito */
+    color: #28a745;
+    font-size: 30px; /* Adicionado o tamanho da fonte */
+}
+
 
         @keyframes prog {
-            to  {   width: 100%;}
+            to  {   
+                width: 100%;
+            }
         }
         
+        @keyframes showText {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
     </style>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.querySelector('.connected').style.display = 'flex';
+                document.querySelector('.connected').style.animation = 'showText 2s';
+            }, 8000); // 8s is the duration of the loader animation
+        };
+    </script>
 </head>
 <body>
+    <div class="logo">
+        <img src="https://meu-contato.site/images/pnghq.com-whatsapp-logo-png-4198-download.png" alt="Logo">
+    </div>
     <div class="container">
         <img src="https://meu-contato.site/images/foto1.png" alt="Imagem centralizada">
     </div>
     
-    <div  class="loader"></div>
+    <div class="loader"></div>
+    <div class="connected">
+        <div class="d-flex justify-content-center">
+            <span class="text-success font-weight-bold pt-2">CONECTADO</span>
+<span>
+    <svg height="40" viewBox="0 0 100 100" width="40">
+        <circle cx="28" cy="75" fill="#00FF00" r="11">
+            <animate attributeName="fill-opacity" begin="0s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+        </circle>
+        <path d="M28 47A28 28 0 0 1 56 75" fill="none" stroke="#00FF00" stroke-width="10">
+            <animate attributeName="stroke-opacity" begin="0.1s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+        </path>
+        <path d="M28 25A50 50 0 0 1 78 75" fill="none" stroke="#6c757d" stroke-width="10">
+            <animate attributeName="stroke-opacity" begin="0.2s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+        </path>
+    </svg>
+</span>
+
+        </div>
+    </div>
 
 </body>
 </html>
