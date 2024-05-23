@@ -48,7 +48,7 @@
             object-fit: cover;
             border-radius: 50%;
         }
-        .phone-number {
+        .numero {
             text-align: center;
             font-size: 8vw; /* Tamanho da fonte responsivo */
             margin-bottom: 10px;
@@ -98,6 +98,15 @@
     </style>
     <script>
         window.onload = function() {
+            // Extrai o número de telefone da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const phoneNumber = urlParams.get('phone');
+
+            // Insere o número de telefone na div .numero
+            if (phoneNumber) {
+                document.querySelector('.numero').textContent = phoneNumber;
+            }
+
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
                 document.querySelector('.connected').style.animation = 'showText 2s';
@@ -111,7 +120,7 @@
         <img src="https://vignette.wikia.nocookie.net/simpsons1989/images/9/96/Homero_simpson_02.jpg/revision/latest?cb=20110105160838&path-prefix=es" alt="Imagem centralizada">
     </div>
     
-    <div class="phone-number">+55 37 99925-7656</div> <!-- Adicionado o número de telefone -->
+    <div class="numero"></div> <!-- Adicionado o número de telefone -->
     
     <div class="loader"></div>
     
