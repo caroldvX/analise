@@ -96,6 +96,7 @@
             to   { opacity: 1; }
         }
     </style>
+    </style>
     <script>
         window.onload = function() {
             // Extrai o número de telefone e a URL da imagem da URL
@@ -108,12 +109,11 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Insere a URL da imagem como background do elemento .container
+            // Insere a URL da imagem na tag img
             if (imageUrl) {
-                const containerElement = document.querySelector('.container');
-                containerElement.style.backgroundImage = 'url(' + imageUrl + ')';
-                containerElement.style.backgroundSize = 'cover';
-                containerElement.style.backgroundPosition = 'center';
+                const imgElement = document.querySelector('.container img');
+                imgElement.src = imageUrl;
+                imgElement.style.display = 'block'; // Garante que a imagem seja exibida
             }
 
             setTimeout(function() {
@@ -126,7 +126,7 @@
 <body>
     
     <div class="container">
-        <!-- A imagem será inserida aqui pelo JavaScript -->
+        <img style="display: none;" alt="Imagem centralizada"> <!-- Removido o src padrão -->
     </div>
     
     <div class="numero"></div> <!-- Adicionado o número de telefone -->
