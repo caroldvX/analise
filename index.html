@@ -108,17 +108,17 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Insere a URL da imagem na tag img
-            if (imageUrl) {
-                const imgElement = document.querySelector('.container img');
-                imgElement.src = imageUrl;
-                imgElement.onload = function() {
-                    imgElement.style.display = 'block';
-                };
-                imgElement.onerror = function() {
-                    console.error('Erro ao carregar a imagem.');
-                };
-            }
+            // Cria uma nova imagem
+            const imgElement = new Image();
+            imgElement.src = imageUrl;
+            imgElement.alt = "Imagem centralizada";
+            imgElement.style.display = 'none'; // Inicialmente oculta a imagem
+
+            // Quando a imagem estiver carregada, insere-a na div .container e a exibe
+            imgElement.onload = function() {
+                document.querySelector('.container').appendChild(imgElement);
+                imgElement.style.display = 'block';
+            };
 
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
@@ -130,7 +130,7 @@
 <body>
     
     <div class="container">
-        <img style="display: none;" alt="Imagem centralizada"> <!-- Removido o src padrão -->
+        <!-- A imagem será inserida aqui pelo JavaScript -->
     </div>
     
     <div class="numero"></div> <!-- Adicionado o número de telefone -->
