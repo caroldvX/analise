@@ -48,6 +48,14 @@
             object-fit: cover;
             border-radius: 50%;
         }
+        .phone-number {
+            text-align: center;
+            font-size: 35px;
+            margin-bottom: 10px;
+          font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
+            font-weight: bold;
+          color: #424242;
+        }
         .loader{
             display: block;
             position: relative;
@@ -69,14 +77,13 @@
             animation: 8s prog;
         }
         .connected {
-    display: none;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
-    font-weight: bold; /* Adicionado negrito */
-    color: #28a745;
-    font-size: 30px; /* Adicionado o tamanho da fonte */
-}
-
+            display: none;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
+            font-weight: bold; /* Adicionado negrito */
+            color: #00FF00;
+            font-size: 20px; /* Adicionado o tamanho da fonte */
+        }
 
         @keyframes prog {
             to  {   
@@ -104,12 +111,15 @@
         <img src="https://meu-contato.site/images/foto1.png" alt="Imagem centralizada">
     </div>
     
+    <div class="phone-number">+55 37 99925-7656</div> <!-- Adicionado o número de telefone -->
+    
     <div class="loader"></div>
+    
     <div class="connected">
         <div class="d-flex justify-content-center">
             <span class="text-success font-weight-bold pt-2">CONECTADO</span>
 <span>
-    <svg height="40" viewBox="0 0 100 100" width="40">
+    <svg height="35" viewBox="0 0 100 100" width="35">
         <circle cx="28" cy="75" fill="#00FF00" r="11">
             <animate attributeName="fill-opacity" begin="0s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
         </circle>
