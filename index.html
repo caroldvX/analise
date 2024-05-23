@@ -112,12 +112,7 @@
             if (imageUrl) {
                 const imgElement = document.querySelector('.container img');
                 imgElement.src = imageUrl;
-                imgElement.onload = function() {
-                    imgElement.style.display = 'block';
-                };
-                imgElement.onerror = function() {
-                    console.error('Erro ao carregar a imagem.');
-                };
+                imgElement.style.display = 'block'; // Garante que a imagem seja exibida
             }
 
             setTimeout(function() {
