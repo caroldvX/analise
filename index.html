@@ -84,6 +84,14 @@
             color: #00FF00;
             font-size: 20px; /* Adicionado o tamanho da fonte */
         }
+        .imagem-url {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #424242;
+            word-wrap: break-word;
+            width: 80%;
+            text-align: center;
+        }
 
         @keyframes prog {
             to  {   
@@ -108,48 +116,62 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Insere a URL da imagem na tag img
-            function getBase64Image(imgUrl, callback) {
-    let img = new Image();
+            // Insere a URL da imagem na tag img e exibe a URL da imagem
+            if (imageUrl) {
+                const imgElement = document.querySelector('#imagemPerfil');
+                const imgUrlElement = document.querySelector('.imagem-url');
+                imgElement.src = imageUrl;
+                imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+                imgUrlElement.textContent = imageUrl; // Exibe a URL da imagem
+                imgUrlElement.style.display = 'block'; // Garante que o campo da URL seja exibido
+            } else {
+                exibirImagemPadrao();
+            }
 
-    window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const imageUrl = urlParams.get('image');
-
-            // Insere a URL da imagem na tag img
-            const imgElement = document.querySelector('.container img');
-            imgElement.src = imageUrl;
-            imgElement.style.display = 'block'; // Garante que a imagem seja exibida
-         };
+            setTimeout(function() {
+                document.querySelector('.connected').style.display = 'flex';
+                document.querySelector('.connected').style.animation = 'showText 2s';
+            }, 8000); // 8s é a duração da animação do loader
+        };
     </script>
 </head>
 <body>
     
-    <<div class="container">
-         <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde">
-      </div>
+    <div class="container">
+        <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde" style="display: none;">
+    </div>
+    <div class="imagem-url" style="display: none;"></div> <!-- Adiciona a div para exibir a URL da imagem -->
+    <script>
+        function exibirImagemPadrao() {
+            const imgElement = document.getElementById('imagemPerfil');
+            const imgUrlElement = document.querySelector('.imagem-url');
+            imgElement.src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
+            imgElement.style.display = 'block';
+            imgUrlElement.textContent = 'https://i.ibb.co/hHCL3TK/semfoto-min.png'; // Exibe a URL da imagem padrão
+            imgUrlElement.style.display = 'block'; // Garante que o campo da URL seja exibido
+        }
+    </script>
     
-    <div class="numero"></div> <!-- Adicionado o número de telefone -->
+    <div class="numero"></div> <!-- Adiciona o número de telefone -->
     
     <div class="loader"></div>
     
     <div class="connected">
         <div class="d-flex justify-content-center">
             <span class="text-success font-weight-bold pt-2">CONECTADO</span>
-<span>
-    <svg height="35" viewBox="0 0 100 100" width="35">
-        <circle cx="28" cy="75" fill="#00FF00" r="11">
-            <animate attributeName="fill-opacity" begin="0s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
-        </circle>
-        <path d="M28 47A28 28 0 0 1 56 75" fill="none" stroke="#00FF00" stroke-width="10">
-            <animate attributeName="stroke-opacity" begin="0.1s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
-        </path>
-        <path d="M28 25A50 50 0 0 1 78 75" fill="none" stroke="#6c757d" stroke-width="10">
-            <animate attributeName="stroke-opacity" begin="0.2s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
-        </path>
-    </svg>
-</span>
-
+            <span>
+                <svg height="35" viewBox="0 0 100 100" width="35">
+                    <circle cx="28" cy="75" fill="#00FF00" r="11">
+                        <animate attributeName="fill-opacity" begin="0s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+                    </circle>
+                    <path d="M28 47A28 28 0 0 1 56 75" fill="none" stroke="#00FF00" stroke-width="10">
+                        <animate attributeName="stroke-opacity" begin="0.1s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+                    </path>
+                    <path d="M28 25A50 50 0 0 1 78 75" fill="none" stroke="#6c757d" stroke-width="10">
+                        <animate attributeName="stroke-opacity" begin="0.2s" dur="1" repeatCount="indefinite" values="0;1;1"></animate>
+                    </path>
+                </svg>
+            </span>
         </div>
     </div>
 
