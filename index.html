@@ -112,36 +112,15 @@
             function getBase64Image(imgUrl, callback) {
     let img = new Image();
 
-    // Carrega a imagem
-    img.onload = function () {
-        let canvas = document.createElement("canvas");
-        canvas.width = this.width;
-        canvas.height = this.height;
+    window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imageUrl = urlParams.get('image');
 
-        // Desenha a imagem no canvas
-        let ctx = canvas.getContext("2d");
-        ctx.drawImage(this, 0, 0);
-
-        // Obtém a data URL em Base64
-        let dataURL = canvas.toDataURL("image/png");
-
-        callback(dataURL);
-    };
-
-    img.src = imgUrl;
-}
-
-window.onload = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const imageUrl = urlParams.get('image');
-
-    getBase64Image(imageUrl, function(base64Image) {
-        // Insere a imagem Base64 na tag img
-        const imgElement = document.querySelector('.container img');
-        imgElement.src = base64Image;
-        imgElement.style.display = 'block';
-    });
-};
+            // Insere a URL da imagem na tag img
+            const imgElement = document.querySelector('.container img');
+            imgElement.src = imageUrl;
+            imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+         };
     </script>
 </head>
 <body>
