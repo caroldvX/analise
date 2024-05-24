@@ -110,11 +110,9 @@
 
             // Insere a URL da imagem na tag img
             if (imageUrl) {
-                const imgElement = document.querySelector('#imagemPerfil');
+                const imgElement = document.querySelector('.container img');
                 imgElement.src = imageUrl;
                 imgElement.style.display = 'block'; // Garante que a imagem seja exibida
-            } else {
-                exibirImagemPadrao();
             }
 
             setTimeout(function() {
@@ -127,15 +125,8 @@
 <body>
     
     <div class="container">
-        <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde"
-         alt="Imagem centralizada" style="display: none;">
+        <img style="display: none;" alt="Imagem centralizada"> <!-- Removido o src padrão -->
     </div>
-  <script>
-    function exibirImagemPadrao() {
-             document.getElementById('imagemPerfil').src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
-             document.getElementById('imagemPerfil').style.display = 'block';
-         }
-  </script>
     
     <div class="numero"></div> <!-- Adicionado o número de telefone -->
     
