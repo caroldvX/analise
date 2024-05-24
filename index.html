@@ -94,43 +94,28 @@
     </style>
     <script>
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const phoneNumber = urlParams.get('phone');
-            let imageUrl = urlParams.get('image');
-
-            if (phoneNumber) {
-                document.querySelector('.numero').textContent = phoneNumber;
-            }
-
-            if (!imageUrl) {
-                // Use a imagem padrão se não houver uma URL fornecida
-                imageUrl = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
-            }
-
+            // Se a imagem não for fornecida, use a imagem padrão
+            const imageUrl = getParameterByName('image') || 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
             const imgElement = document.querySelector('#imagemPerfil');
             imgElement.src = imageUrl;
-            imgElement.style.display = 'block'; // Ensure the image is displayed
-            imgElement.onload = function() {
-                console.log('Image loaded successfully');
-            };
-            imgElement.onerror = function() {
-                console.error('Error loading image');
-                exibirImagemPadrao();
-            };
+            imgElement.style.display = 'block';
 
-            setTimeout(function() {
-                document.querySelector('.connected').style.display = 'flex';
-                document.querySelector('.connected').style.animation = 'showText 2s';
-            }, 8000);
+            // Outro código do seu onload
         };
 
-        function exibirImagemPadrao() {
-            document.getElementById('imagemPerfil').src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
-            document.getElementById('imagemPerfil').style.display = 'block';
+        // Função para obter parâmetro da URL por nome
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
     </script>
 </head>
-<body cz-shortcut-listen="true">
+<body>
     <div class="container">
         <img id="imagemPerfil" class="imagem" width="260" src="" alt="Carregando..." style="display: none;">
     </div>
