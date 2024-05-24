@@ -93,31 +93,16 @@
         }
     </style>
     <script>
-        function urlToBase64url(url) {
-            return btoa(url)
-                .replace(/\+/g, '-')
-                .replace(/\//g, '_')
-                .replace(/=/g, '');
-        }
-
-        function base64urlToUrl(base64url) {
-            const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-            const padding = base64.length % 4 === 0 ? '' : new Array(4 - base64.length % 4 + 1).join('=');
-            return atob(base64 + padding);
-        }
-
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const phoneNumber = urlParams.get('phone');
-            const base64ImageUrl = urlParams.get('image');
+            const imageUrl = urlParams.get('image');
 
             if (phoneNumber) {
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            if (base64ImageUrl) {
-                const imageUrl = base64urlToUrl(base64ImageUrl);
-                console.log('Decoded Image URL:', imageUrl); // Log the decoded URL
+            if (imageUrl) {
                 const imgElement = document.querySelector('#imagemPerfil');
                 imgElement.src = imageUrl;
                 imgElement.style.display = 'block'; // Ensure the image is displayed
