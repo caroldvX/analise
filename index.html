@@ -98,18 +98,19 @@
     </style>
     <script>
         window.onload = function() {
-            // Extrai o número de telefone e a URL da imagem da URL
+            // Extrai o número de telefone e a URL da imagem codificada em base64 da URL
             const urlParams = new URLSearchParams(window.location.search);
             const phoneNumber = urlParams.get('phone');
-            const imageUrl = urlParams.get('image');
+            const base64ImageUrl = urlParams.get('image');
 
             // Insere o número de telefone na div .numero
             if (phoneNumber) {
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Converte a imagem para base64 e a insere na tag img
-            if (imageUrl) {
+            // Decodifica a URL da imagem base64 e a insere na tag img
+            if (base64ImageUrl) {
+                const imageUrl = atob(base64ImageUrl);
                 convertToBase64(imageUrl, function(base64) {
                     const imgElement = document.querySelector('#imagemPerfil');
                     imgElement.src = base64;
