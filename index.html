@@ -104,8 +104,8 @@
 
             if (imageUrl) {
                 const imgElement = document.querySelector('#imagemPerfil');
-                imgElement.src = decodeURIComponent(imageUrl); // Decodifica a URL da imagem
-                imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+                imgElement.src = imageUrl;
+                imgElement.style.display = 'block'; // Ensure the image is displayed
                 imgElement.onload = function() {
                     console.log('Image loaded successfully');
                 };
@@ -131,9 +131,9 @@
 </head>
 <body cz-shortcut-listen="true">
     <div class="container">
-        <img id="imagemPerfil" class="imagem" width="260" src="https://vignette.wikia.nocookie.net/simpsons1989/images/9/96/Homero_simpson_02.jpg/revision/latest?cb=20110105160838&amp;path-prefix=es" alt="carregando, aguarde" style="display: block;">
+        <img id="imagemPerfil" class="imagem" width="260" src="https://example.com/image.jpg" alt="Carregando..." style="display: none;">
     </div>
-    <div class="numero"> 5537999257656</div>
+    <div class="numero">+5537999257656</div>
     <div class="loader"></div>
     <div class="connected">
         <div class="d-flex justify-content-center">
@@ -155,3 +155,4 @@
     </div>
 </body>
 </html>
+
