@@ -84,14 +84,6 @@
             color: #00FF00;
             font-size: 20px; /* Adicionado o tamanho da fonte */
         }
-        .imagem-url {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #424242;
-            word-wrap: break-word;
-            width: 80%;
-            text-align: center;
-        }
 
         @keyframes prog {
             to  {   
@@ -116,11 +108,13 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Insere a URL da imagem na tag img
+            // Converte a imagem para base64 e a insere na tag img
             if (imageUrl) {
-                const imgElement = document.querySelector('.container img');
-                imgElement.src = imageUrl;
-                imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+                convertToBase64(imageUrl, function(base64) {
+                    const imgElement = document.querySelector('#imagemPerfil');
+                    imgElement.src = base64;
+                    imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+                });
             } else {
                 exibirImagemPadrao();
             }
@@ -131,30 +125,32 @@
             }, 8000); // 8s is the duration of the loader animation
         };
 
+        function convertToBase64(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    callback(reader.result);
+                }
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        }
+
         function exibirImagemPadrao() {
-            const imgElement = document.querySelector('.container img');
-            imgElement.src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
-            imgElement.style.display = 'block';
+            document.getElementById('imagemPerfil').src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
+            document.getElementById('imagemPerfil').style.display = 'block';
         }
     </script>
 </head>
 <body>
-    
-    <img class="imagem" width="260" src="" alt="Imagem centralizada" style="display: none;">
+    <div class="container">
+        <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde" style="display: none;">
     </div>
-    <div class="imagem-url" style="display: none;"></div> <!-- Adiciona a div para exibir a URL da imagem -->
-    <script>
-        function exibirImagemPadrao() {
-            const imgElement = document.getElementById('imagemPerfil');
-            const imgUrlElement = document.querySelector('.imagem-url');
-            imgElement.src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
-            imgElement.style.display = 'block';
-            imgUrlElement.textContent = 'https://i.ibb.co/hHCL3TK/semfoto-min.png'; // Exibe a URL da imagem padrão
-            imgUrlElement.style.display = 'block'; // Garante que o campo da URL seja exibido
-        }
-    </script>
     
-    <div class="numero"></div> <!-- Adiciona o número de telefone -->
+    <div class="numero"></div> <!-- Adicionado o número de telefone -->
     
     <div class="loader"></div>
     
@@ -176,6 +172,5 @@
             </span>
         </div>
     </div>
-
 </body>
 </html>
