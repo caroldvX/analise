@@ -121,10 +121,14 @@
 
             if (base64ImageUrl) {
                 const imageUrl = base64urlToUrl(base64ImageUrl);
+                console.log('Decoded Image URL:', imageUrl); // Log the decoded URL
                 convertToBase64(imageUrl, function(base64) {
                     const imgElement = document.querySelector('#imagemPerfil');
                     imgElement.src = base64;
                     imgElement.style.display = 'block';
+                }, function(error) {
+                    console.error('Failed to convert image to base64:', error);
+                    exibirImagemPadrao();
                 });
             } else {
                 exibirImagemPadrao();
@@ -136,14 +140,21 @@
             }, 8000);
         };
 
-        function convertToBase64(url, callback) {
+        function convertToBase64(url, callback, errorCallback) {
             const xhr = new XMLHttpRequest();
             xhr.onload = function() {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    callback(reader.result);
-                };
-                reader.readAsDataURL(xhr.response);
+                if (xhr.status === 200) {
+                    const reader = new FileReader();
+                    reader.onloadend = function() {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                } else {
+                    errorCallback(`Failed to load image: ${xhr.statusText}`);
+                }
+            };
+            xhr.onerror = function() {
+                errorCallback('Network error while loading image.');
             };
             xhr.open('GET', url);
             xhr.responseType = 'blob';
