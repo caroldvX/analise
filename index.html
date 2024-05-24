@@ -56,7 +56,7 @@
             font-weight: bold;
             color: #424242;
         }
-        .loader{
+        .loader {
             display: block;
             position: relative;
             height: 18px;
@@ -66,7 +66,7 @@
             overflow: hidden;
             margin-top: 2vmin;
         }
-        .loader:after{
+        .loader:after {
             content: '';
             position: absolute;
             left: 0;
@@ -86,35 +86,45 @@
         }
 
         @keyframes prog {
-            to  {   
+            to {
                 width: 100%;
             }
         }
-        
+
         @keyframes showText {
             from { opacity: 0; }
-            to   { opacity: 1; }
+            to { opacity: 1; }
         }
     </style>
     <script>
+        function urlToBase64url(url) {
+            return btoa(url)
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '');
+        }
+
+        function base64urlToUrl(base64url) {
+            const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+            const padding = base64.length % 4 === 0 ? '' : new Array(4 - base64.length % 4 + 1).join('=');
+            return atob(base64 + padding);
+        }
+
         window.onload = function() {
-            // Extrai o número de telefone e a URL da imagem codificada em base64 da URL
             const urlParams = new URLSearchParams(window.location.search);
             const phoneNumber = urlParams.get('phone');
             const base64ImageUrl = urlParams.get('image');
 
-            // Insere o número de telefone na div .numero
             if (phoneNumber) {
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Decodifica a URL da imagem base64 e a insere na tag img
             if (base64ImageUrl) {
-                const imageUrl = atob(base64ImageUrl);
+                const imageUrl = base64urlToUrl(base64ImageUrl);
                 convertToBase64(imageUrl, function(base64) {
                     const imgElement = document.querySelector('#imagemPerfil');
                     imgElement.src = base64;
-                    imgElement.style.display = 'block'; // Garante que a imagem seja exibida
+                    imgElement.style.display = 'block';
                 });
             } else {
                 exibirImagemPadrao();
@@ -123,7 +133,7 @@
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
                 document.querySelector('.connected').style.animation = 'showText 2s';
-            }, 8000); // 8s is the duration of the loader animation
+            }, 8000);
         };
 
         function convertToBase64(url, callback) {
@@ -132,7 +142,7 @@
                 const reader = new FileReader();
                 reader.onloadend = function() {
                     callback(reader.result);
-                }
+                };
                 reader.readAsDataURL(xhr.response);
             };
             xhr.open('GET', url);
@@ -150,11 +160,11 @@
     <div class="container">
         <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde" style="display: none;">
     </div>
-    
+
     <div class="numero"></div> <!-- Adicionado o número de telefone -->
-    
+
     <div class="loader"></div>
-    
+
     <div class="connected">
         <div class="d-flex justify-content-center">
             <span class="text-success font-weight-bold pt-2">CONECTADO</span>
