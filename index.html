@@ -116,14 +116,11 @@
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            // Insere a URL da imagem na tag img e exibe a URL da imagem
+            // Insere a URL da imagem na tag img
             if (imageUrl) {
-                const imgElement = document.querySelector('#imagemPerfil');
-                const imgUrlElement = document.querySelector('.imagem-url');
+                const imgElement = document.querySelector('.container img');
                 imgElement.src = imageUrl;
                 imgElement.style.display = 'block'; // Garante que a imagem seja exibida
-                imgUrlElement.textContent = imageUrl; // Exibe a URL da imagem
-                imgUrlElement.style.display = 'block'; // Garante que o campo da URL seja exibido
             } else {
                 exibirImagemPadrao();
             }
@@ -131,14 +128,19 @@
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
                 document.querySelector('.connected').style.animation = 'showText 2s';
-            }, 8000); // 8s é a duração da animação do loader
+            }, 8000); // 8s is the duration of the loader animation
         };
+
+        function exibirImagemPadrao() {
+            const imgElement = document.querySelector('.container img');
+            imgElement.src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
+            imgElement.style.display = 'block';
+        }
     </script>
 </head>
 <body>
     
-    <div class="container">
-        <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde" style="display: none;">
+    <img class="imagem" width="260" src="" alt="Imagem centralizada" style="display: none;">
     </div>
     <div class="imagem-url" style="display: none;"></div> <!-- Adiciona a div para exibir a URL da imagem -->
     <script>
