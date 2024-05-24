@@ -18,7 +18,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Nunito Sans', sans-serif; /* Adicionado a fonte Nunito Sans */
+            font-family: 'Nunito Sans', sans-serif;
         }
         .logo {
             display: flex;
@@ -42,7 +42,7 @@
             border-radius: 50%;
             position: relative;
         }
-        img {
+        .imagem {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -50,9 +50,9 @@
         }
         .numero {
             text-align: center;
-            font-size: 8vw; /* Tamanho da fonte responsivo */
+            font-size: 8vw;
             margin-bottom: 10px;
-            font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
+            font-family: 'Montserrat', sans-serif;
             font-weight: bold;
             color: #424242;
         }
@@ -79,18 +79,14 @@
         .connected {
             display: none;
             text-align: center;
-            font-family: 'Montserrat', sans-serif; /* Adicionado a fonte Montserrat */
-            font-weight: bold; /* Adicionado negrito */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
             color: #00FF00;
-            font-size: 20px; /* Adicionado o tamanho da fonte */
+            font-size: 20px;
         }
-
         @keyframes prog {
-            to {
-                width: 100%;
-            }
+            to { width: 100%; }
         }
-
         @keyframes showText {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -122,14 +118,16 @@
             if (base64ImageUrl) {
                 const imageUrl = base64urlToUrl(base64ImageUrl);
                 console.log('Decoded Image URL:', imageUrl); // Log the decoded URL
-                convertToBase64(imageUrl, function(base64) {
-                    const imgElement = document.querySelector('#imagemPerfil');
-                    imgElement.src = base64;
-                    imgElement.style.display = 'block';
-                }, function(error) {
-                    console.error('Failed to convert image to base64:', error);
+                const imgElement = document.querySelector('#imagemPerfil');
+                imgElement.src = imageUrl;
+                imgElement.style.display = 'block'; // Ensure the image is displayed
+                imgElement.onload = function() {
+                    console.log('Image loaded successfully');
+                };
+                imgElement.onerror = function() {
+                    console.error('Error loading image');
                     exibirImagemPadrao();
-                });
+                };
             } else {
                 exibirImagemPadrao();
             }
@@ -139,27 +137,6 @@
                 document.querySelector('.connected').style.animation = 'showText 2s';
             }, 8000);
         };
-
-        function convertToBase64(url, callback, errorCallback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const reader = new FileReader();
-                    reader.onloadend = function() {
-                        callback(reader.result);
-                    };
-                    reader.readAsDataURL(xhr.response);
-                } else {
-                    errorCallback(`Failed to load image: ${xhr.statusText}`);
-                }
-            };
-            xhr.onerror = function() {
-                errorCallback('Network error while loading image.');
-            };
-            xhr.open('GET', url);
-            xhr.responseType = 'blob';
-            xhr.send();
-        }
 
         function exibirImagemPadrao() {
             document.getElementById('imagemPerfil').src = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
@@ -171,11 +148,8 @@
     <div class="container">
         <img id="imagemPerfil" class="imagem" width="260" src="" alt="carregando, aguarde" style="display: none;">
     </div>
-
-    <div class="numero"></div> <!-- Adicionado o número de telefone -->
-
+    <div class="numero"></div>
     <div class="loader"></div>
-
     <div class="connected">
         <div class="d-flex justify-content-center">
             <span class="text-success font-weight-bold pt-2">CONECTADO</span>
