@@ -96,26 +96,27 @@
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const phoneNumber = urlParams.get('phone');
-            const imageUrl = urlParams.get('image');
+            let imageUrl = urlParams.get('image');
 
             if (phoneNumber) {
                 document.querySelector('.numero').textContent = phoneNumber;
             }
 
-            if (imageUrl) {
-                const imgElement = document.querySelector('#imagemPerfil');
-                imgElement.src = imageUrl;
-                imgElement.style.display = 'block'; // Ensure the image is displayed
-                imgElement.onload = function() {
-                    console.log('Image loaded successfully');
-                };
-                imgElement.onerror = function() {
-                    console.error('Error loading image');
-                    exibirImagemPadrao();
-                };
-            } else {
-                exibirImagemPadrao();
+            if (!imageUrl) {
+                // Use a imagem padrão se não houver uma URL fornecida
+                imageUrl = 'https://i.ibb.co/hHCL3TK/semfoto-min.png';
             }
+
+            const imgElement = document.querySelector('#imagemPerfil');
+            imgElement.src = imageUrl;
+            imgElement.style.display = 'block'; // Ensure the image is displayed
+            imgElement.onload = function() {
+                console.log('Image loaded successfully');
+            };
+            imgElement.onerror = function() {
+                console.error('Error loading image');
+                exibirImagemPadrao();
+            };
 
             setTimeout(function() {
                 document.querySelector('.connected').style.display = 'flex';
@@ -131,7 +132,7 @@
 </head>
 <body cz-shortcut-listen="true">
     <div class="container">
-        <img id="imagemPerfil" class="imagem" width="260" src="https://example.com/image.jpg" alt="Carregando..." style="display: none;">
+        <img id="imagemPerfil" class="imagem" width="260" src="" alt="Carregando..." style="display: none;">
     </div>
     <div class="numero">+5537999257656</div>
     <div class="loader"></div>
@@ -155,4 +156,3 @@
     </div>
 </body>
 </html>
-
